@@ -6,9 +6,6 @@ export const UPDATE_COLUMN = '@EditEmployeePage/UPDATE_COLUMN';
 export const RESET_MEMBER = '@EditEmployeePage/RESET_MEMBER';
 export const FETCH_OPTIONS = '@EditEmployeePage/FETCH_OPTIONS';
 
-const ADD_MEMBER = '@EmployeePage/ADD_MEMBER';
-const EDIT_MEMBER= '@EmployeePage/EDIT_MEMBER';
-
 const INITIAL_STATE = {
 	members: [],
 	member: {

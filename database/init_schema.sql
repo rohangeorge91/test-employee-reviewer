@@ -100,7 +100,6 @@ ADD UNIQUE INDEX `unique_reviewee_reviewer_assessment_year`
 (`reviewee_id` ASC, `reviewer_id` ASC, `assessment_year` ASC);
 
 
-
 /* the performance_review has 1 to many connection to review_attribute and review_attribute_value */
 CREATE TABLE `test_database`.`review_assessment_attribute` (
   `id` BIGINT NOT NULL,
@@ -124,4 +123,34 @@ CREATE TABLE `test_database`.`review_assessment_attribute` (
     REFERENCES `test_database`.`review_attribute_value` (`value`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+/* delta changes */
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+DROP FOREIGN KEY `fk_review_assessment_attribute_review_id`;
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+ADD CONSTRAINT ``
+  FOREIGN KEY (`review_id`)
+  REFERENCES `test_database`.`review_assessment` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+DROP FOREIGN KEY ``;
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+DROP INDEX `fk_review_assessment_attribute_review_id_idx` ;
+;
+
+ALTER TABLE `test_database`.`review_assessment` 
+CHANGE COLUMN `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+ADD INDEX `fk_review_assessment_attribute_review_id_idx` (`review_id` ASC);
+;
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+ADD CONSTRAINT `fk_review_assessment_attribute_review_id`
+  FOREIGN KEY (`review_id`)
+  REFERENCES `test_database`.`review_assessment` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 

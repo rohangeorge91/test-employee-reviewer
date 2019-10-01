@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import employeeReducer from './pages/employeePage/reducer';
 import loginReducer from './pages/login/reducer';
 import assignmentReducer from './pages/assignmentPage/reducer';
+import reviewReducer from './pages/reviewPage/reducer';
 
 let enhancer;
 const middleware = [thunk];
@@ -21,7 +22,8 @@ const appReducers = () => {
 	return combineReducers({
 		employeePage: employeeReducer,
 		loginPage: loginReducer,
-		assignmentPage: assignmentReducer
+		assignmentPage: assignmentReducer,
+		reviewPage: reviewReducer
 	});
 };
 
