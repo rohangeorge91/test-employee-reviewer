@@ -19,6 +19,9 @@ export const fetchAllMembers = (fetchAPI = fetch) => (dispatch, getState) => {
 	return fetchAPI(`${SERVER_URL}/admin/users`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch Members';
+		}
 			return res.json();
 		}).then((res) => {
 			dispatch({ 
@@ -27,7 +30,7 @@ export const fetchAllMembers = (fetchAPI = fetch) => (dispatch, getState) => {
 			});
 		}).catch((error) => {
 			console.error(error);
-			return 'Failed to fetch Members';
+			throw 'Failed to fetch Members';
 		});
 };
 
@@ -47,6 +50,9 @@ export const fetchMember = (userId, fetchAPI = fetch) => (dispatch, getState) =>
 	return fetchAPI(`${SERVER_URL}/admin/users/${userId}`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch Member';
+		}
 		return res.json();
 	}).then((res) => {
 		dispatch({
@@ -55,7 +61,7 @@ export const fetchMember = (userId, fetchAPI = fetch) => (dispatch, getState) =>
 		});
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to fetch Member';
 	});
 };
 
@@ -63,6 +69,9 @@ export const fetchOptions = (fetchAPI = fetch) => (dispatch, getState) => {
 	return fetchAPI(`${SERVER_URL}/admin/role`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch role';
+		}
 		return res.json();
 	}).then((res) => {
 		dispatch({
@@ -71,7 +80,7 @@ export const fetchOptions = (fetchAPI = fetch) => (dispatch, getState) => {
 		});
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to fetch role';
 	});
 };
 
@@ -100,6 +109,9 @@ export const addMember = (user, fetchAPI = fetch) => (dispatch, _) => {
 		}),
 		body: JSON.stringify(user)
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to add Members';
+		}
 		return res.json();
 	}).then(() => {
 		return dispatch(fetchAllMembers())
@@ -107,7 +119,7 @@ export const addMember = (user, fetchAPI = fetch) => (dispatch, _) => {
 		return dispatch(resetMember());
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to add Members';
 	});
 };
 
@@ -124,6 +136,9 @@ export const editMember = (user, fetchAPI = fetch) => (dispatch, _) => {
 		}),
 		body: JSON.stringify(user)
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to edit Member';
+		}
 		return res.json();
 	}).then(() => {
 		return dispatch(resetMember());
@@ -131,7 +146,7 @@ export const editMember = (user, fetchAPI = fetch) => (dispatch, _) => {
 		return dispatch(fetchAllMembers())
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to edit Member';
 	});
 };
 
@@ -144,10 +159,13 @@ export const deleteMember = (userId, fetchAPI = fetch) => (dispatch, _) => {
 	return fetchAPI(`${SERVER_URL}/admin/users/${userId}`, {
 		method: 'DELETE',
 		headers: authenticationRequest()
-	}).then(() => {
+	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to delete Member';
+		}
 		return dispatch(fetchAllMembers())
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to delete Members';
 	});
 };

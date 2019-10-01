@@ -153,4 +153,6 @@ ADD CONSTRAINT `fk_review_assessment_attribute_review_id`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+ALTER TABLE `test_database`.`review_assessment_attribute` 
+CHANGE COLUMN `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT ;
 

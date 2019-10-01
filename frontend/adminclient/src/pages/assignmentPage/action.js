@@ -53,6 +53,9 @@ export const fetchAllMembers = (fetchAPI = fetch) => (dispatch, getState) => {
 	return fetchAPI(`${SERVER_URL}/admin/users`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch Members';
+		}
 		return res.json();
 	}).then((res) => {
 		dispatch({
@@ -62,7 +65,7 @@ export const fetchAllMembers = (fetchAPI = fetch) => (dispatch, getState) => {
 		return res;
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to fetch Members';
 	});
 };
 
@@ -74,6 +77,9 @@ export const fetchAllAssessmentYear = (fetchAPI = fetch) => (dispatch, getState)
 	return fetchAPI(`${SERVER_URL}/admin/year`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch Year';
+		}
 		return res.json();
 	}).then((res) => {
 		dispatch({
@@ -83,7 +89,7 @@ export const fetchAllAssessmentYear = (fetchAPI = fetch) => (dispatch, getState)
 		return res;
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to fetch Year';
 	});
 };
 
@@ -95,6 +101,9 @@ export const fetchAllReviewAssessment = (fetchAPI = fetch) => (dispatch, getStat
 	return fetchAPI(`${SERVER_URL}/admin/reviewsAssessment`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch Assessment';
+		}
 		return res.json();
 	}).then((res) => {
 		dispatch({
@@ -103,7 +112,7 @@ export const fetchAllReviewAssessment = (fetchAPI = fetch) => (dispatch, getStat
 		});
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to fetch Assessment';
 	});
 };
 
@@ -115,6 +124,9 @@ export const fetchReviewAssessment = (id, fetchAPI = fetch) => (dispatch, getSta
 	return fetchAPI(`${SERVER_URL}/admin/reviewsAssessment/${id}`, {
 		headers: authenticationRequest()
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to fetch Assessment';
+		}
 		return res.json();
 	}).then((res) => {
 		dispatch({
@@ -123,7 +135,7 @@ export const fetchReviewAssessment = (id, fetchAPI = fetch) => (dispatch, getSta
 		});
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to fetch Assessment';
 	});
 };
 
@@ -140,6 +152,9 @@ export const addReviewAssessment = (reviewAssessment, fetchAPI = fetch) => (disp
 		}),
 		body: JSON.stringify(reviewAssessment)
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to add Assessment';
+		}
 		return res.json();
 	}).then(() => {
 		return dispatch(resetReviewAssessment());
@@ -147,7 +162,7 @@ export const addReviewAssessment = (reviewAssessment, fetchAPI = fetch) => (disp
 		return dispatch(fetchAllReviewAssessment())
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to add Assessment';
 	});
 };
 
@@ -164,6 +179,9 @@ export const editReviewAssessment = (reviewAssessment, fetchAPI = fetch) => (dis
 		}),
 		body: JSON.stringify(reviewAssessment)
 	}).then((res) => {
+		if (res.status < 200 || res.status >= 300) {
+			throw 'Failed to edit Assessment';
+		}
 		return res.json();
 	}).then(() => {
 		return dispatch(resetReviewAssessment());
@@ -171,7 +189,7 @@ export const editReviewAssessment = (reviewAssessment, fetchAPI = fetch) => (dis
 		return dispatch(fetchAllReviewAssessment())
 	}).catch((error) => {
 		console.error(error);
-		return 'Failed to fetch Members';
+		throw 'Failed to edit Assessment';
 	});
 };
 
@@ -185,11 +203,14 @@ export const deleteReviewAssessment = (reviewAssessmentId, fetchAPI = fetch) => 
 		return fetchAPI(`${SERVER_URL}/admin/reviewsAssessment/${reviewAssessmentId}`, {
 			method: 'DELETE',
 			headers: authenticationRequest()
-		}).then(() => {
+		}).then((res) => {
+			if (res.status < 200 || res.status >= 300) {
+				throw 'Failed to delete Assessment';
+			}
 			return dispatch(fetchAllReviewAssessment());
 		}).catch((error) => {
 			console.error(error);
-			return 'Failed to fetch Members';
+			throw 'Failed to delete Assessment';
 		});
 	};
 };

@@ -24,7 +24,9 @@ const mapDispatchToProps = (dispatch) => {
 			appRouter(`/assignment/${reviewAssessmentId}`);
 		},
 		deleteReviewAssessment: (reviewAssessmentId) => {
-			return dispatch(deleteReviewAssessment(reviewAssessmentId));
+			return dispatch(deleteReviewAssessment(reviewAssessmentId)).catch(() => {
+				alert("Can\'t delete because assignment has reviews associated with it");
+			});
 		}
 	}
 };

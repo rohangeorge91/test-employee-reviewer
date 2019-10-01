@@ -7,6 +7,8 @@ import com.test.reviewAPI.controller.admin.LoginController;
 import com.test.reviewAPI.controller.admin.MemberManagementController;
 import com.test.reviewAPI.controller.admin.MemberRoleController;
 import com.test.reviewAPI.controller.admin.ReviewAssessmentController;
+import com.test.reviewAPI.controller.admin.ReviewAttributeController;
+import com.test.reviewAPI.controller.admin.ReviewController;
 import com.test.reviewAPI.interceptor.CorInterceptor;
 import com.test.reviewAPI.interceptor.UserInterceptor;
 
@@ -29,7 +31,8 @@ public class JerseyConfig extends ResourceConfig {
     register(MemberRoleController.class);
     register(ReviewAssessmentController.class);
     register(AssessmentYearController.class);
-    
+    register(ReviewAttributeController.class);
+    register(ReviewController.class);
   }
 
   public JerseyConfig() {

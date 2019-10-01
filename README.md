@@ -5,4 +5,6 @@ A poc to show a full-stack app inital was planning to make it a docker-compose (
 2. Next make the prepare the backend server, you are expected to have maven on your local. You need to navigate to backend folder and then run the shell called `prepareServer.sh` (which basically does a mvn clean install) then excute the `startServer.sh`
 3. Next start the client, again you need to NodeJS with npm on your local system. You can then navigate the folder frontend/adminclient and then run npm start to start of the webclient on 3000.
 
-For now I didn't get enough time to get all the part of the functionality of the website ready. You can login by using `johndoe`
+For now I didn't get enough time to get all the part of the functionality of the website ready. You can login by using `johndoe` and test
+1> add, remove, edit of member
+2> add, remove, edit of assignment.
