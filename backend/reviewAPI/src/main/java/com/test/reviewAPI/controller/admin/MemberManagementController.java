@@ -2,6 +2,7 @@ package com.test.reviewAPI.controller.admin;
 
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -38,6 +39,7 @@ public class MemberManagementController {
   }
   
   @POST
+  @Consumes("application/json")
   @Produces("application/json")
   @RolesAllowed({"admin"})
   public Member create(Member member) {
@@ -45,6 +47,7 @@ public class MemberManagementController {
   }
 
   @PUT
+  @Consumes("application/json")
   @Produces("application/json")
   @RolesAllowed({"admin"})
   public Member update(Member member) {

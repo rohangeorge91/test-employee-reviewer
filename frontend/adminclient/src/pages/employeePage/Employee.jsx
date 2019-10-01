@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { fetchAllMembers, deleteMember, editMember } from './action';
+import { fetchAllMembers, deleteMember, resetMembers } from './action';
 import { getLoginId } from '../login/authLib';
+import { appRouter } from '../../history';
 
 const mapStateToProps = (state) => {
 	return {
@@ -11,11 +12,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		reset: () => {
+			return resetMembers();
+		},
 		fetchAllMember: () => {
 			return dispatch(fetchAllMembers());
 		},
-		editMember: (userId) => {
-			return dispatch(editMember(userId));
+		addMember: () => {
+			appRouter('/employee/add');
+		},
+		openEditMember: (userId) => {
+			appRouter(`/employee/${userId}`);
 		},
 		deleteMember: (userId, curUserId = getLoginId()) => {
 			if (userId === curUserId) {
@@ -32,6 +39,10 @@ class Employee extends PureComponent {
 		this.props.fetchAllMember();
 	}
 
+	componentWillUnmount() {
+		this.props.reset();
+	}
+
 	renderTableRows() {
 		const { members } = this.props;
 		return members.map((member, index) => {
@@ -42,7 +53,7 @@ class Employee extends PureComponent {
 					<td>{member.name}</td>
 					<td>{member.role}</td>
 					<td>
-						<button onClick={(e) => this.props.editMember(member.userId)}>
+						<button onClick={(e) => this.props.openEditMember(member.userId)}>
 							<i className="fa fa-pencil" aria-hidden="true"></i>
 						</button>
 					</td>
@@ -65,17 +76,20 @@ class Employee extends PureComponent {
 						<h2>All Members</h2>
 						<br />
 					</div>
-					<div className="col-md-3">
+					<div className="col-md-3 button-panel">
 						<br />
 						<button onClick={(e) => this.props.fetchAllMember()}>
 							<i className="fa fa-refresh" aria-hidden="true"></i>
+						</button>
+						<button onClick={(e) => this.props.addMember()} className="">
+							<i className="fa fa-plus" aria-hidden="true"></i>
 						</button>
 						<br />
 					</div>
 				</div>
 				<div className="row justify-content-md-center align-items-center">
 					<div className="col-md-12">
-						<table className="table table-dark table-striped table-hover table-bordered">
+						<table className="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
 									<th>#</th>

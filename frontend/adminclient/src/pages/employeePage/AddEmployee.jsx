@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { fetchMember, resetMember, onChangeMember, fetchOptions, editMember } from './action';
+import { resetMember, onChangeMember, fetchOptions, addMember } from './action';
 import { goBack } from '../../history';
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,15 +15,12 @@ const mapDispatchToProps = (dispatch) => {
 		fetchRoles: () => {
 			return dispatch(fetchOptions())
 		},
-		fetchMember: (userId) => {
-			return dispatch(fetchMember(userId));
-		},
 		onChange: (name, value) => {
 			return dispatch(onChangeMember(name, value));
 		},
 		onSubmit: (e, user) => {
 			e.preventDefault();
-			return dispatch(editMember(user)).then(() => {
+			return dispatch(addMember(user)).then(() => {
 				goBack();
 			});
 		},
@@ -33,10 +30,9 @@ const mapDispatchToProps = (dispatch) => {
 	}
 };
 
-class EditEmployee extends PureComponent {
+class AddEmployee extends PureComponent {
 	componentDidMount() {
 		this.props.fetchRoles();
-		this.props.fetchMember(this.props.userId);
 	}
 
 	componentWillUnmount() {
@@ -70,8 +66,9 @@ class EditEmployee extends PureComponent {
 							<div className="form-group row">
 								<label htmlFor="userId" className="col-sm-2 col-form-label">User ID</label>
 								<div className="col-sm-10">
-									<input type="text" readOnly className="form-control-plaintext" id="userId"
-										name="userId" defaultValue={member.userId} />
+									<input type="text" className="form-control" id="userId" name="userId"
+										value={member.userId} 
+										onChange={(e) => this.props.onChange('userId', e.target.value)} />
     						</div>
 							</div>
 							<div className="form-group row">
@@ -100,4 +97,4 @@ class EditEmployee extends PureComponent {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditEmployee);
+export default connect(mapStateToProps, mapDispatchToProps)(AddEmployee);

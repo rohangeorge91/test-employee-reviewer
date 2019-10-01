@@ -1,12 +1,12 @@
 const INITIAL_STATE = {
-	
+	assignments: []
 };
 
-const homeReducer = (state = INITIAL_STATE, action) => {
+const assignmentReducer = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		default:
 			return state;
 	}
 };
 
-export default homeReducer;
+export default assignmentReducer;

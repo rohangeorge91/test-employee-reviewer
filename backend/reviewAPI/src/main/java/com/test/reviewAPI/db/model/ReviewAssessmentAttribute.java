@@ -16,7 +16,7 @@ public class ReviewAssessmentAttribute implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	//bi-directional many-to-one association to ReviewAssessment
 	@ManyToOne
@@ -36,11 +36,11 @@ public class ReviewAssessmentAttribute implements Serializable {
 	public ReviewAssessmentAttribute() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

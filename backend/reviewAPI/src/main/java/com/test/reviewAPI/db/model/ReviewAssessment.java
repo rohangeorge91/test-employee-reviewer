@@ -17,7 +17,7 @@ public class ReviewAssessment implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	private String summary;
 
@@ -43,11 +43,11 @@ public class ReviewAssessment implements Serializable {
 	public ReviewAssessment() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

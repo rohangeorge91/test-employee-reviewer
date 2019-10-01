@@ -19,7 +19,8 @@ const buildRouter = () => {
 					<App location={history.location.pathname}>
 						<Switch>
 							<Route exact path="/employee" component={lazy(() => import('./pages/employeePage/Employee.jsx'))} />
-							<Route exact path="/employee/:userId" component={lazy(() => import('./pages/employeePage/Employee.jsx'))} />
+							<Route exact path="/employee/add" component={lazy(() => import('./pages/employeePage/AddEmployee.jsx'))} />
+							<Route exact path="/employee/:userId" component={lazy(() => import('./pages/employeePage/EditEmployee.jsx'))} />
 							<Route exact path="/review" component={lazy(() => import('./pages/reviewPage/Review.jsx'))} />
 							<Route exact path="/assignment" component={lazy(() => import('./pages/assignmentPage/Assignment.jsx'))} />
 						</Switch>

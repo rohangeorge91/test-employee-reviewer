@@ -22,8 +22,8 @@ class PageNavbar extends PureComponent {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
 						{this.renderNavTab('/employee', 'Employee')}
-						{this.renderNavTab('/review', 'Review')}
 						{this.renderNavTab('/assignment', 'Assignment')}
+						{this.renderNavTab('/review', 'Review')}
 					</ul>
 				</div>
 			</nav>

@@ -17,7 +17,7 @@ class Home extends PureComponent {
 	render() {
 		return (
 			<div>
-				Home
+				NOT IMPLEMENTED YET.
 			</div>
 		);
 	}

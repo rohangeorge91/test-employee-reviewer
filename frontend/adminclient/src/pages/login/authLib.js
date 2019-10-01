@@ -25,12 +25,12 @@ export const login = (user, fetchAPI = fetch) => {
 			if (res.logged && res.role === 'admin') {
 				userInfo.userId = user;
 			} else {
-				throw 'User not found.';
+				throw new Error('User not found');
 			}
 			return res;
 		}).catch((error) => {
 			console.error(error);
-			throw 'User not found';
+			throw new Error('User not found');
 		});
 };
 

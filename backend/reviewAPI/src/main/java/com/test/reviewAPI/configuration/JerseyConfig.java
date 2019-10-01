@@ -4,6 +4,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 import com.test.reviewAPI.controller.admin.LoginController;
 import com.test.reviewAPI.controller.admin.MemberManagementController;
+import com.test.reviewAPI.controller.admin.MemberRoleController;
 import com.test.reviewAPI.interceptor.CorInterceptor;
 import com.test.reviewAPI.interceptor.UserInterceptor;
 
@@ -23,6 +24,7 @@ public class JerseyConfig extends ResourceConfig {
   private void registerEndpoints() {
     register(MemberManagementController.class);
     register(LoginController.class);
+    register(MemberRoleController.class);
   }
 
   public JerseyConfig() {
